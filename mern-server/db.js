@@ -1,8 +1,14 @@
-import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
+import { MongoClient, ServerApiVersion } from 'mongodb';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const uri = process.env.MONGODB_URI;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+if (!uri) {
+  throw new Error('MONGODB_URI is not defined');
+}
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
